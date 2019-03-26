@@ -14,9 +14,6 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
-
-
-
 $router->post('login','Login\LoginController@login');//登录
 $router->post('center','Login\LoginController@center');//个人中心
 
