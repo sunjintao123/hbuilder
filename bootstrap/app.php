@@ -59,7 +59,7 @@ $app->singleton(
 
  $app->middleware([
      //App\Http\Middleware\ExampleMiddleware::class
-     App\Http\Middleware\IllegalMiddleware::class
+     //App\Http\Middleware\IllegalMiddleware::class
  ]);
 
 // $app->routeMiddleware([
