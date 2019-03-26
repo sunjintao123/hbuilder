@@ -4,9 +4,7 @@
   class GoodsController {
       public  function  goodsList(){
           $goodsInfo=GoodsModel::get();
-          $response=[
-              'list'=>$goodsInfo
-          ];
-          return $response;
+
+          return $goodsInfo;
       }
   }
