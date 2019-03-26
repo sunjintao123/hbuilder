@@ -43,6 +43,8 @@ $router->post('pay/alipay/notify','Pay\IndexController@notify');    //异步
 $router->get('pay/alipay','Pay\IndexController@pay');    //订单
 
 
+$router->post('login','Login\LoginController@login');//登录
+$router->post('center','Login\LoginController@center');//个人中心
 
 
 
