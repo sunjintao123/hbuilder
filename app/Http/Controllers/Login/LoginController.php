@@ -56,11 +56,12 @@ class LoginController extends Controller
 //        echo 1;
         $token=$request->input('token');
         $uid=$request->input('uid');
-        if(empty($token)|| empty($uid)){
+        if(empty($token) || empty($uid)){
             $response=[
                 'errno'=>5001,
                 'msg'=>'请先登录'
             ];
+            return $response;
         }
         $a_token=Redis::hget('str:u:token:'.$uid,'app');
         if($token==$a_token){
