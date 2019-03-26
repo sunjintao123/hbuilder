@@ -18,7 +18,7 @@ $router->get('/', function () use ($router) {
 
 
 $router->get('/goods/detail/{id}',"Goods\GoodsDetailController@GoodsDetail");   //商品详情
-
+$router->get('/goods/list',"Goods\GoodsController@goodsList");   //商品列表
 
 
 
