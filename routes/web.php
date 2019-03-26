@@ -19,7 +19,5 @@ $router->get('/', function () use ($router) {
 
 $router->post('login','Login\LoginController@login');//登录
 $router->post('center','Login\LoginController@center');//个人中心
-
-
-
-
+$router->get('/goods/list',"Goods\GoodsController@goodsList");
+$router->get('/goods/detail/{id}',"Goods\GoodsDetailController@GoodsDetail");
