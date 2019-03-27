@@ -34,6 +34,9 @@ $router->get('/orderadd',"Order\OrderController@orderAdd");
 
 $router->post('/cart/list',"Cart\CartController@cartList");
 
-$router->post('/goods/fav',"Goods\GoodsDetailController@goodsFav");
-$router->post('/goods/zan',"Goods\GoodsDetailController@goodsZan");
+$router->post('/goods/fav',"Goods\GoodsDetailController@addGoodsFav");
+$router->post('/goods/zan',"Goods\GoodsDetailController@addGoodsZan");
+
+$router->post('/goods/favlist',"Goods\GoodsDetailController@goodsFav");
+$router->post('/goods/zanlist',"Goods\GoodsDetailController@goodsZan");
 

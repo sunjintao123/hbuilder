@@ -73,7 +73,7 @@ class GoodsDetailController extends Controller
         return $response;
     }
 
-    public function goodsFav(Request $request)
+    public function addGoodsFav(Request $request)
     {
         $uid = $request->input('uid');
         //$uid = 1;
@@ -104,7 +104,47 @@ class GoodsDetailController extends Controller
 
     }
 
+    public function goodsFav(Request $request)
+    {
+        $uid = $request->input('uid');
+        //$uid = 11;
+        $key = 'sets:goods_fav:'.$uid;
+        $goods_id = Redis::zrange($key,0,-1);
+        if(empty($goods_id)){
+            return [
+                'error' =>  46646,
+                'msg'   =>  '您还没有收藏的商品'
+            ];
+        }
+        foreach($goods_id as $v){
+            $data = GoodsModel::where(['goods_id'=>$v])->first()->toArray();
+            $info[] = $data;
+        }
+
+        return $info;
+    }
+
     public function goodsZan(Request $request)
+    {
+        $uid = $request->input('uid');
+        //$uid = 11;
+        $key = 'sets:goods_zan:'.$uid;
+        $goods_id = Redis::zrange($key,0,-1);
+        if(empty($goods_id)){
+            return [
+                'error' =>  46646,
+                'msg'   =>  '您还没有点赞的商品'
+            ];
+        }
+        foreach($goods_id as $v){
+            $data = GoodsModel::where(['goods_id'=>$v])->first()->toArray();
+            $info[] = $data;
+        }
+
+        return $info;
+    }
+
+    public function addGoodsZan(Request $request)
     {
         $uid = $request->input('uid');
         //$uid = 1;
