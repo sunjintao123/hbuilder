@@ -27,4 +27,10 @@ $router->get('/goods/detail/{id}',"Goods\GoodsDetailController@GoodsDetail");
 
 $router->post('/cart/add',"Goods\GoodsDetailController@addCart");
 
+$router->post('/order/list',"Order\OrderController@orderList");
+$router->post('/orderadd',"Order\OrderController@orderAdd");
+$router->get('/orderadd',"Order\OrderController@orderAdd");
+
+
 $router->post('/cart/list',"Cart\CartController@cartList");
+
