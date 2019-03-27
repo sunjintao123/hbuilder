@@ -17,19 +17,26 @@ class CartController extends Controller
         $where = [
             'uid'   =>  $uid
         ];
-        $info = CartModel::where($where)->get();
+        if(empty(CartModel::where($where)->get()->toArray())){
+            return [
+                'error' =>  522222,
+                'msg'   =>  '购物车为空'
+            ];
+        }
+        $info = CartModel::where($where)->get()->toArray();
 
         foreach($info as $k=>$v){
             $where = [
                 'goods_id'  =>  $v['goods_id']
             ];
-            $goodsInfo = GoodsModel::where($where)->first();
+            $goodsInfo = GoodsModel::where($where)->first()->toArray();
             var_dump($v);
-            $v['goods_name'] = $goodsInfo->goods_name;
-            $v['price'] = $goodsInfo->price;
-            $v['img'] = $goodsInfo->img;
+            $v['goods_name'] = $goodsInfo['goods_name'];
+            $v['price'] = $goodsInfo['price'];
+            $v['img'] = $goodsInfo['img'];
             $data[] = $v;
         }
+
 
         return $data;
     }
