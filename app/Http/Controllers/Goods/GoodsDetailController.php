@@ -29,8 +29,16 @@ class GoodsDetailController extends Controller
         $key = 'set:goods_click:'.$id;
         Redis::zadd($key,time(),time());
 
+        $goods_key = 'str:goods_detail:'.$id;
+        $data = Redis::get($goods_key);
+        if(empty($data)){
+            $info = GoodsModel::where($where)->first();
+            Redis::set($goods_key,json_encode($info));
+            Redis::expire($goods_key,60*60*3);
 
-        $info = GoodsModel::where($where)->first();
+        }else{
+            $info = json_decode($data,true);
+        }
         $info['click'] = Redis::zCard($key);
         return $info;
     }
