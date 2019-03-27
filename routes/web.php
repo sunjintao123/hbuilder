@@ -22,3 +22,6 @@ $router->post('center','Login\LoginController@center');//个人中心
 $router->get('/goods/list',"Goods\GoodsController@goodsList");
 $router->get('/goods/detail/{id}',"Goods\GoodsDetailController@GoodsDetail");
 $router->post('/cart/add',"Goods\GoodsDetailController@addCart");
+$router->post('/order/list',"Order\OrderController@orderList");
+$router->post('/orderadd',"Order\OrderController@orderAdd");
+$router->get('/orderadd',"Order\OrderController@orderAdd");
