@@ -26,7 +26,12 @@ class GoodsDetailController extends Controller
             'goods_id'  =>  $id,
         ];
 
+        $key = 'set:goods_click:'.$id;
+        Redis::zadd($key,time(),time());
+
+
         $info = GoodsModel::where($where)->first();
+        $info['click'] = Redis::zCard($key);
         return $info;
     }
 
@@ -67,4 +72,6 @@ class GoodsDetailController extends Controller
         }
         return $response;
     }
+
+
 }
