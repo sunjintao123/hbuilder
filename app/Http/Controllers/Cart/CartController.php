@@ -30,7 +30,7 @@ class CartController extends Controller
                 'goods_id'  =>  $v['goods_id']
             ];
             $goodsInfo = GoodsModel::where($where)->first()->toArray();
-            var_dump($v);
+            //var_dump($v);
             $v['goods_name'] = $goodsInfo['goods_name'];
             $v['price'] = $goodsInfo['price'];
             $v['img'] = $goodsInfo['img'];
