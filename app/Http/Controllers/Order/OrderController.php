@@ -12,8 +12,8 @@ use Illuminate\Support\Facades\Redis;
 class OrderController extends Controller
 {
     public function orderAdd(Request $request){
-        //$uid = $request -> input('uid');
-        $uid =1;
+        $uid = $request -> input('uid');
+        //$uid =1;
         $cart_goods = CartModel::where(['uid'=> $uid])->get()->toArray();
         if(empty($cart_goods)){
             return [
