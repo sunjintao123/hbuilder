@@ -33,23 +33,36 @@ class GoodsDetailController extends Controller
 
     public function addCart(Request $request)
     {
-        $data = [
+        $where = [
             'goods_id'  =>  $request->input('goods_id'),
-            'num'       =>  $request->input('num'),
-            'add_time'  =>  time(),
             'uid'       =>  $request->input('uid'),
-            'session_token' =>  Redis::hget('str:u:token:'.$request->input('uid'),'app')
         ];
-        $id = CartModel::insertGetId($data);
-        if($id){
+        $info = CartModel::where($where)->first();
+        if($info){ //修改
+            $data = [
+                'num'   =>  $info->num+$request->input('num')
+            ];
+            $rs = CartModel::where($where)->update($data);
+        }else{//添加
+            $data = [
+                'goods_id'  =>  $request->input('goods_id'),
+                'num'       =>  $request->input('num'),
+                'add_time'  =>  time(),
+                'uid'       =>  $request->input('uid'),
+                'session_token' =>  Redis::hget('str:u:token:'.$request->input('uid'),'app')
+            ];
+            $rs = CartModel::insertGetId($data);
+        }
+
+        if($rs){
             $response = [
                 'error' =>  0,
-                'msg'   =>  '添加成功'
+                'msg'   =>  '加入购物车成功'
             ];
         }else{
             $response = [
                 'error' =>  500005,
-                'msg'   =>  '添加失败'
+                'msg'   =>  '加入购物车失败'
             ];
         }
         return $response;
