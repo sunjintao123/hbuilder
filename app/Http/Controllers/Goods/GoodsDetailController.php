@@ -38,7 +38,7 @@ class GoodsDetailController extends Controller
             'num'       =>  $request->input('num'),
             'add_time'  =>  time(),
             'uid'       =>  $request->input('uid'),
-            'session_token' =>  Redis::hget('str:u:token'.$request->input('uid'),'app')
+            'session_token' =>  Redis::hget('str:u:token:'.$request->input('uid'),'app')
         ];
         $id = CartModel::insertGetId($data);
         if($id){
