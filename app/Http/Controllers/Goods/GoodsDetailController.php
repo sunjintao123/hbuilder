@@ -93,12 +93,43 @@ class GoodsDetailController extends Controller
         if($rs){
             return [
                 'error' =>  0,
-                'msg'   =>  '已收藏'
+                'msg'   =>  '收藏成功'
             ];
         }else{
             return [
                 'error' =>  522201,
                 'msg'   =>  '收藏失败'
+            ];
+        }
+
+    }
+
+    public function goodsZan(Request $request)
+    {
+        $uid = $request->input('uid');
+        //$uid = 1;
+        $goods_id = $request->input('goods_id');
+        //$goods_id = 11;
+        $key = 'sets:goods_zan:'.$uid;
+        $rs = Redis::zrange($key,0,-1);
+        foreach($rs as $k=>$v){
+            if($v==$goods_id){
+                return [
+                    'error' =>  522200,
+                    'msg'   =>  '请勿重复点赞'
+                ];
+            }
+        }
+        $rs = Redis::zAdd($key,time(),$goods_id);
+        if($rs){
+            return [
+                'error' =>  0,
+                'msg'   =>  '点赞成功'
+            ];
+        }else{
+            return [
+                'error' =>  522201,
+                'msg'   =>  '点赞失败'
             ];
         }
 

@@ -35,4 +35,5 @@ $router->get('/orderadd',"Order\OrderController@orderAdd");
 $router->post('/cart/list',"Cart\CartController@cartList");
 
 $router->post('/goods/fav',"Goods\GoodsDetailController@goodsFav");
+$router->post('/goods/zan',"Goods\GoodsDetailController@goodsZan");
 
