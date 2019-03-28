@@ -65,7 +65,7 @@ class OrderController extends Controller
             'uid' => $uid
         ];
         $orderInfo=OrderModel::where($where)->get();
-        if(empty($orderInfo)){
+        if(empty($orderInfo['uid'])){
             return [
                 'error' =>  40006,
                 'msg'   =>  '您没有订单'
