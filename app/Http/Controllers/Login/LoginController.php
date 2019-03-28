@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Login;
 use foo\bar;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Redis;
 use App\Model\UserModel;
 use GuzzleHttp;

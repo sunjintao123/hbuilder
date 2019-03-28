@@ -66,6 +66,10 @@ class OrderController extends Controller
         ];
         $orderInfo=OrderModel::where($where)->get();
 
-        return $orderInfo;
+        foreach($orderInfo as $k=>$v){
+            $v['add_time'] = date('Y-m-d H:i:s' , $v['add_time']);
+            $info[] = $v;
+        }
+        return $info;
     }
 }
