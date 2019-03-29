@@ -12,19 +12,25 @@ use GuzzleHttp;
 class LoginController extends Controller
 {
     public function login(Request $request){
-
 //        echo "<pre>";print_r($_POST);echo "</pre>";die;
         $uname=$request->input('uname');
         $pwd=$request->input('pwd');
-//        echo $uname;echo "<br>";
-//        echo $pwd;die;
-        $where = [
-            'name' =>  $uname,
-        ];
-//        var_dump($where);die;
+        if(substr_count($uname,'@')){
+            $where=[
+                'email'=>$uname
+            ];
+        }elseif(is_numeric($uname)&&strlen($uname)==11){
+            $where=[
+                'tel'=>$uname
+            ];
+        }else{
+            $where=[
+                'name'=>$uname
+            ];
+        }
         if(empty($uname)|| empty($pwd)){
-            $response=[
-                'error'=>400,
+            return [
+                'error'=>40001,
                 'msg'=>'账号或密码不能为空'
             ];
         }
@@ -45,7 +51,7 @@ class LoginController extends Controller
                 ];
             } else {
                 $response=[
-                    'error'=>500,
+                    'error'=>50002,
                     'msg'=>'登录失败'
                 ];
             }
