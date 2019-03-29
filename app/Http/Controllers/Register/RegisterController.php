@@ -63,6 +63,20 @@ class RegisterController extends Controller
                     'msg'=>'账号已存在'
                 ];
             }
+            $res2=UserModel::where(['tel'=>$tel])->first();
+            if($res2){
+                return [
+                    'error'=>40004,
+                    'msg'=>'手机号已存在'
+                ];
+            }
+            $res3=UserModel::where(['email'=>$email])->first();
+            if($res3){
+                return [
+                    'error'=>40005,
+                    'msg'=>'邮箱已存在'
+                ];
+            }
             $pwd=password_hash($pwd1,PASSWORD_BCRYPT);
 //	    echo $pwd;die;
 //	    $pwd=password_verify($pwd1,'$2y$10$TGftIAn6wDc.mBF1Z0Mh8e8mxskkKbsOh8GCDnohgdhE2J/vujlCC');
