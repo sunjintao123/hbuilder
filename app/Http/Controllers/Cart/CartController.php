@@ -17,7 +17,8 @@ class CartController extends Controller
         $where = [
             'uid'   =>  $uid
         ];
-        if(empty(CartModel::where($where)->get()->toArray())){
+        $info = CartModel::where($where)->get();
+        if(empty($info[0])){
             return [
                 'error' =>  522222,
                 'msg'   =>  '购物车为空'

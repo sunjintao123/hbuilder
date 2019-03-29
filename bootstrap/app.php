@@ -30,8 +30,8 @@ $app->withEloquent();
 | Register Container Bindings
 |--------------------------------------------------------------------------
 |
-| Now we will register a few bindings in the service container. We will
-| register the exception handler and the console kernel. You may add
+| Now we will Register a few bindings in the service container. We will
+| Register the exception handler and the console kernel. You may add
 | your own bindings here if you like or you can make another file.
 |
 */
@@ -71,13 +71,13 @@ $app->singleton(
 | Register Service Providers
 |--------------------------------------------------------------------------
 |
-| Here we will register all of the application's service providers which
+| Here we will Register all of the application's service providers which
 | are used to bind services into the container. Service providers are
 | totally optional, so you are not required to uncomment this line.
 |
 */
 
-// $app->register(App\Providers\AppServiceProvider::class);
+// $app->Register(App\Providers\AppServiceProvider::class);
 // $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
 $app->register(Illuminate\Redis\RedisServiceProvider::class);

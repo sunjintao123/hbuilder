@@ -65,7 +65,12 @@ class OrderController extends Controller
             'uid' => $uid
         ];
         $orderInfo=OrderModel::where($where)->get();
-
+        if(empty($orderInfo[0])){
+            return [
+                'error' =>  40006,
+                'msg'   =>  '您没有订单'
+            ];
+        }
         foreach($orderInfo as $k=>$v){
             $v['add_time'] = date('Y-m-d H:i:s' , $v['add_time']);
             $info[] = $v;
