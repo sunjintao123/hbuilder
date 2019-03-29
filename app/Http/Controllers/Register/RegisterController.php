@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Login;
+namespace App\Http\Controllers\Register;
 use foo\bar;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -9,11 +9,13 @@ use Illuminate\Support\Facades\Redis;
 use App\Model\UserModel;
 use GuzzleHttp;
 
-class LoginController extends Controller
+class RegisterController extends Controller
 {
         public function register(Request $request){
 //            echo "<pre>";print_r($_POST);echo "</pre>";
+//            echo 1;die;
             $name=$request->input('uname');
+//            echo $name;die;
             if(empty($name)){
                return [
                    'error'=>40001,
@@ -69,7 +71,7 @@ class LoginController extends Controller
             //echo '<pre>';print_r($_POST);echo '</pre>';
             $data=[
                 'name'=>$name,
-                'pwd'  =>$pwd,
+                'password'  =>$pwd,
                 'tel'=>$tel,
                 'email'=>$email,
                 'reg_time'=>time(),
