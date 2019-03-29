@@ -85,7 +85,7 @@ class RegisterController extends Controller
             //echo '<pre>';print_r($_POST);echo '</pre>';
             $data=[
                 'name'=>$name,
-                'password'  =>$pwd,
+                'password'=>$pwd,
                 'tel'=>$tel,
                 'email'=>$email,
                 'reg_time'=>time(),
@@ -93,10 +93,19 @@ class RegisterController extends Controller
             $uid=UserModel::insertGetId($data);
             //var_dump($uid);
             if($uid){
+                $token = substr(md5(time()) . mt_rand(1, 9999), 10, 10);
+                $redis_key_token='str:u:token:'.$uid;
+                Redis::hset($redis_key_token,'app',$token);
                 return [
                     'error'=>0,
-                    'msg'=>'注册成功'
+                    'msg'=>'注册成功',
+                    'token'=>$token,
+                    'user'=>$name,
+                    'uid'=>$res->uid,
+                    'email'=>$email,
+                    'tel'=>$tel,
                 ];
+
             }else{
                 return [
                     'error'=>50002,

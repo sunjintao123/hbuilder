@@ -40,19 +40,18 @@ class LoginController extends Controller
             if (password_verify($pwd, $res->password)){
                 $token = substr(md5(time()) . mt_rand(1, 9999), 10, 10);
                 $redis_key_token='str:u:token:'.$res->uid;
-                Redis::del($redis_key_token);
                 Redis::hset($redis_key_token,'app',$token);
                 $response=[
                     'error'=>0,
                     'msg'=>'登录成功',
                     'token'=>$token,
                     'user'=>$uname,
-                    'uid'=>$res->uid
+                    'uid'=>$res->uid,
                 ];
             } else {
                 $response=[
                     'error'=>50002,
-                    'msg'=>'登录失败'
+                    'msg'=>'账号或密码错误'
                 ];
             }
             return $response;
