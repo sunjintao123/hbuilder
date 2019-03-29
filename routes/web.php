@@ -19,6 +19,8 @@ $router->get('/', function () use ($router) {
 
 $router->post('login','Login\LoginController@login');//登录
 
+
+$router->post('/changepwd','Login\ChangePwdController@changePwd');//修改密码
 $router->post('/do/register','Register\RegisterController@register');//注册
 
 $router->post('center','Login\LoginController@center');//个人中心
