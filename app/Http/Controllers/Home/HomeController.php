@@ -41,6 +41,7 @@ class HomeController extends Controller
                 'msg'       =>  '您与该用户没有共同好友'
             ];
         }else{
+            $common_info = [];
             foreach($uu_id as $v){
                 foreach($look_uid as $value){
                     if($v == $value){
@@ -48,6 +49,12 @@ class HomeController extends Controller
                         $common_info[] = $data;
                     }
                 }
+            }
+            if(empty($common_info)){
+                $common_info = [
+                    'error'     =>  66668,
+                    'msg'       =>  '您与该用户没有共同好友'
+                ];
             }
         }
         $info = [
