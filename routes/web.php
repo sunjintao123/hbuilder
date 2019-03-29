@@ -45,3 +45,5 @@ $router->post('/goods/zanlist',"Goods\GoodsDetailController@goodsZan");//点赞�
 $router->post('/homepage/addfir',"Home\HomeController@addFirend");//添加好友
 
 $router->post('/homepage',"Home\HomeController@homepage");//个人主页
+
+$router->get('/crontab/orderdel',"Crontab\CrontabController@cronOrder");//个人主页
