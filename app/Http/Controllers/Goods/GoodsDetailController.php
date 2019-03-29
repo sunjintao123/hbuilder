@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Goods;
 use App\Http\Controllers\Controller;
 use App\Model\CartModel;
 use App\Model\GoodsModel;
+use App\Model\UserModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 
@@ -20,16 +21,22 @@ class GoodsDetailController extends Controller
         //
     }
 
-    public function GoodsDetail($id)
+    public function GoodsDetail(Request $request)
     {
+        $goods_id = $request->input('goods_id');
+        $uid = $request->input('uid');
         $where = [
-            'goods_id'  =>  $id,
+            'goods_id'  =>  $goods_id,
         ];
 
-        $key = 'set:goods_click:'.$id;
+        $key = 'set:goods_click:'.$goods_id;
         Redis::zadd($key,time(),time());
 
-        $goods_key = 'str:goods_detail:'.$id;
+        //添加浏览过的用户
+        $u_key = 'sets:goods_user'.$goods_id;
+        Redis::zadd($u_key,time(),$uid);
+
+        $goods_key = 'str:goods_detail:'.$goods_id;
         $data = Redis::get($goods_key);
         if(empty($data)){
             $info = GoodsModel::where($where)->first();
@@ -40,7 +47,22 @@ class GoodsDetailController extends Controller
             $info = json_decode($data,true);
         }
         $info['click'] = Redis::zCard($key);
+        $info['liulan'] =   [
+            'error'     =>  66666,
+            'msg'       =>  '无人浏览'
+        ];
+        if($info){
+            //展示浏览过的用户
+            $u_id = Redis::zrange($u_key,0,-1);
+            foreach($u_id as $k=>$v){
+                $u_data = UserModel::where(['uid'=>$v])->first();
+                $u_info[] = $u_data;
+            }
+            $info['liulan'] = $u_info;
+        }
+
         return $info;
+
     }
 
 

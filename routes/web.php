@@ -25,7 +25,7 @@ $router->post('center','Login\LoginController@center');//个人中心
 
 $router->get('/goods/list',"Goods\GoodsController@goodsList"); //商品展示
 
-$router->get('/goods/detail/{id}',"Goods\GoodsDetailController@GoodsDetail"); //商品详情
+$router->post('/goods/detail',"Goods\GoodsDetailController@GoodsDetail"); //商品详情
 
 $router->post('/cart/add',"Goods\GoodsDetailController@addCart"); //加入购物车
 
