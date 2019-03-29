@@ -42,3 +42,6 @@ $router->post('/goods/zan',"Goods\GoodsDetailController@addGoodsZan");//点赞
 $router->post('/goods/favlist',"Goods\GoodsDetailController@goodsFav");//收藏列表
 $router->post('/goods/zanlist',"Goods\GoodsDetailController@goodsZan");//点赞列表
 
+$router->post('/homepage/addfir',"Home\HomeController@addFirend");//添加好友
+
+$router->post('/homepage',"Home\HomeController@homepage");//个人主页
