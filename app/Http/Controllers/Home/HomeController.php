@@ -34,8 +34,13 @@ class HomeController extends Controller
         //查看用户好友id
         $u_key = 'set:firend:'.$u_id;
         $look_uid = Redis::zrange($u_key,0,-1);
+        if(empty($uu_id) || empty($look_uid)){
 
-        if(isset($uu_id) && isset($look_uid)){
+            $common_info = [
+                'error'     =>  66668,
+                'msg'       =>  '您与改用户没有共同好友'
+            ];
+        }else{
             foreach($uu_id as $v){
                 foreach($look_uid as $value){
                     if($v == $value){
@@ -44,11 +49,6 @@ class HomeController extends Controller
                     }
                 }
             }
-        }else{
-            $common_info = [
-                'error'     =>  66668,
-                'msg'       =>  '您与改用户没有共同好友'
-            ];
         }
         $info = [
             'u_info'    =>  $uu_info,
