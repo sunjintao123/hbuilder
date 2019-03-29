@@ -49,3 +49,4 @@ $router->post('/homepage/addfir',"Home\HomeController@addFirend");//添加好友
 $router->post('/homepage',"Home\HomeController@homepage");//个人主页
 
 $router->get('/crontab/orderdel',"Crontab\CrontabController@cronOrder");//个人主页
+$router->post('/homepage/firlist',"Home\HomeController@firList");//个人主页

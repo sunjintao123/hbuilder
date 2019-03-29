@@ -81,4 +81,25 @@ class HomeController extends Controller
         }
         return $response;
     }
+
+    //好友列表
+    public function firList(Request $request)
+    {
+        $uid = $request->input('uid');
+
+        $key = 'set:firend:'.$uid;
+        $u_id = Redis::zrange($key,0,-1);
+        if(empty($u_id)){
+            return [
+                'error' =>  66669,
+                'msg'   =>  '您还没有添加好友'
+            ];
+        }else{
+            foreach($u_id as $k=>$v){
+                $data = UserModel::where(['uid' =>$v])->first();
+                $info[] =   $data;
+            }
+            return $info;
+        }
+    }
 }
