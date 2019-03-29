@@ -101,7 +101,7 @@ class RegisterController extends Controller
                     'msg'=>'注册成功',
                     'token'=>$token,
                     'user'=>$name,
-                    'uid'=>$res->uid,
+                    'uid'=>$uid,
                     'email'=>$email,
                     'tel'=>$tel,
                 ];

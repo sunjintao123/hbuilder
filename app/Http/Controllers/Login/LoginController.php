@@ -54,9 +54,13 @@ class LoginController extends Controller
                     'msg'=>'账号或密码错误'
                 ];
             }
-            return $response;
+        }else{
+            $response=[
+                'error'=>50003,
+                'msg'=>'账号或密码错误'
+            ];
         }
-
+        return $response;
     }
     public function center(Request $request){
 //        echo 1;

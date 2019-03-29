@@ -38,7 +38,7 @@ class HomeController extends Controller
 
             $common_info = [
                 'error'     =>  66668,
-                'msg'       =>  '您与改用户没有共同好友'
+                'msg'       =>  '您与该用户没有共同好友'
             ];
         }else{
             foreach($uu_id as $v){
